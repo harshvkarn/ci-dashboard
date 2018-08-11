@@ -1,18 +1,16 @@
 <div class="container">
-  <div class="jumbotron">
-    --Insert Logo here--
-  </div>
+    <img src="src/assets/images/OPENEBS.png">
 </div>
   <ul class="nav nav-tabs" id="myTab" role="tablist">
     <li class="nav-item">
-      <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Master</a>
+      <a class="nav-link active" id="master-tab" data-toggle="tab" href="#master" role="tab" aria-controls="master" aria-selected="true">Master</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">v0.6</a>
+      <a class="nav-link" id="release-tab" data-toggle="tab" href="#release" role="tab" aria-controls="release" aria-selected="false">v0.6</a>
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+    <div class="tab-pane fade show active" id="master" role="tabpanel" aria-labelledby="master-tab">
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -22,58 +20,22 @@
             <th scope="col">GCP</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <th scope="row">jiva/#1a41cf87</th>
+        <tbody *ngIf="undefined !== restItems">
+            <tr *ngFor="let post of restItems">
+            <th scope="row">jiva/#{{post.id}}</th>
             <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
+              <button type="button" [ngClass]='buttonClass(post.build.status)' (click)="clickit(post.build.web_url);">
+                <i [ngClass]='iconClass(post.build.status)' style="font-size:14px"></i> {{post.build.status}}
               </button>
             </td>
             <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
+              <button type="button" [ngClass]='buttonClass(post.aws.status)' (click)="clickit(post.aws.web_url);">
+                <i [ngClass]='iconClass(post.aws.status)' style="font-size:14px"></i> {{post.aws.status}}
               </button>
             </td>
             <td>
-              <button type="button" class="btn btn-round btn-primary">
-                <i class="fa fa-circle-o-notch fa-spin" style="font-size:14px"></i> Running
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">cstor/#45dfet56</th>
-            <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-danger">
-                <i class="fa fa-exclamation-triangle" style="font-size:14px"></i> Failed
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">zfs/#a4es5rt</th>
-            <td>
-              <button type="button" class="btn btn-round btn-danger">
-                <i class="fa fa-exclamation-triangle" style="font-size:14px"></i> Failed
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-danger">
-                <i class="fa fa-exclamation-triangle" style="font-size:14px"></i> Failed
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-danger">
-                <i class="fa fa-exclamation-triangle" style="font-size:14px"></i> Failed
+              <button type="button" [ngClass]='buttonClass(post.gcp.status)' (click)="clickit(post.gcp.web_url);">
+                <i [ngClass]='iconClass(post.gcp.status)' style="font-size:14px"></i> {{post.gcp.status}}
               </button>
             </td>
           </tr>
@@ -81,7 +43,7 @@
       </table>
     </div>
 
-    <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+    <div class="tab-pane fade" id="release" role="tabpanel" aria-labelledby="release-tab">
       <table class="table">
         <thead class="thead-dark">
           <tr>
@@ -150,3 +112,6 @@
       </table>
     </div>
   </div>
+  <script>
+    
+  </script>
