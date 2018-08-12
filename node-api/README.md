@@ -1,3 +1,5 @@
 - Start backend server
-  npm install
-  node server.js
+```bash
+$ npm install
+$ node server.js
+```
