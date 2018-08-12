@@ -1,7 +1,8 @@
-<div class="container">
-    <img src="src/assets/images/OPENEBS.png">
+<div class="container-fluid mast-head">
+    <img class="logo" src="src/assets/images/openebs-logo-mule.svg">
+    <img class="e2e" src="/src/assets/images/e2e.jpg">
 </div>
-  <ul class="nav nav-tabs" id="myTab" role="tablist">
+  <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="master-tab" data-toggle="tab" href="#master" role="tab" aria-controls="master" aria-selected="true">Master</a>
     </li>
@@ -10,32 +11,39 @@
     </li>
   </ul>
   <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active" id="master" role="tabpanel" aria-labelledby="master-tab">
-      <table class="table">
+    <div class="tab-pane fade show active table-responsive" id="master" role="tabpanel" aria-labelledby="master-tab">
+      <table class="table table-hover">
         <thead class="thead-dark">
           <tr>
-            <th scope="col">Commits</th>
-            <th scope="col">Builds</th>
-            <th scope="col">AWS</th>
-            <th scope="col">GCP</th>
+            <th scope="col"><i class="fa fa-code-fork "></i> Commits</th>
+            <th scope="col"><i class="fa fa-cog"></i> Build</th>
+            <th scope="col"><img src="src/assets/images/icon-aws.png" class="icon-aws">  AWS</th>
+            <th scope="col"><img src="src/assets/images/icon-gcp.png" class="icon-gcp">GCP</th>
+            <th>{{bitcoin }}</th>
           </tr>
         </thead>
         <tbody *ngIf="undefined !== restItems">
-            <tr *ngFor="let post of restItems">
-            <th scope="row">jiva/#{{post.id}}</th>
-            <td>
-              <button type="button" [ngClass]='buttonClass(post.build.status)' (click)="clickit(post.build.web_url);">
-                <i [ngClass]='iconClass(post.build.status)' style="font-size:14px"></i> {{post.build.status}}
+            <tr *ngFor="let post of restItems[0]">
+            <td scope="row">
+              <span class="text">
+                <a href="" target="_blank">
+                  <!-- jiva/#{{post.id}} --> {{post[0].commit.substring(32,40)}}
+                </a>
+              </span>
+            </td>
+            <td class="danger">
+              <button type="button" [ngClass]='buttonClass(post[0].build.status)' (click)="clickit(post[0].build.web_url);">
+                <i [ngClass]='iconClass(post[0].build.status)' style="font-size:14px"></i> {{post[0].build.status}}
               </button>
             </td>
             <td>
-              <button type="button" [ngClass]='buttonClass(post.aws.status)' (click)="clickit(post.aws.web_url);">
-                <i [ngClass]='iconClass(post.aws.status)' style="font-size:14px"></i> {{post.aws.status}}
+              <button type="button" [ngClass]='buttonClass(post[1].aws.status)' (click)="clickit(post[1].aws.web_url);">
+                <i [ngClass]='iconClass(post[1].aws.status)' style="font-size:14px"></i> {{post[1].aws.status}}
               </button>
             </td>
             <td>
-              <button type="button" [ngClass]='buttonClass(post.gcp.status)' (click)="clickit(post.gcp.web_url);">
-                <i [ngClass]='iconClass(post.gcp.status)' style="font-size:14px"></i> {{post.gcp.status}}
+              <button type="button" [ngClass]='buttonClass(post[2].gcp.status)' (click)="clickit(post[2].gcp.web_url);">
+                <i [ngClass]='iconClass(post[2].gcp.status)' style="font-size:14px"></i> {{post[2].gcp.status}}
               </button>
             </td>
           </tr>

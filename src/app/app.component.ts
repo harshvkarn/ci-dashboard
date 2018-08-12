@@ -8,6 +8,7 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
+  bitcoin: any;
   title = 'CI-Dashboard';
   restItems: any;
   restItemsUrl = 'http://localhost:3001/rest/v1/api/v4/dashboard';
@@ -15,11 +16,12 @@ export class AppComponent implements OnInit {
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
+    const bitcoin$ = this.http.get('https://blockchain.info/ticker');
     this.getRestItems();
   }
 
   // Read all REST Items
-  getRestItems(): void {
+   getRestItems(): void {
     this.restItemsServiceGetRestItems()
       .subscribe(
         restItems => {
@@ -35,6 +37,8 @@ export class AppComponent implements OnInit {
       .get<any[]>(this.restItemsUrl)
       .pipe(map(data => data));
   }
+
+  // Button Class Name a/c to the status
   buttonClass(status) {
     if(status=="success")
            return "btn btn-round btn-success";
@@ -45,6 +49,8 @@ export class AppComponent implements OnInit {
     else if(status=="running")
         return "btn btn-round btn-primary";
    }
+
+   // Fa Icon a/c to the status
    iconClass(status) {
     if(status=="success")
            return "fa fa-check-circle";
@@ -57,10 +63,11 @@ export class AppComponent implements OnInit {
     console.log('test');
     
    }
+
    clickit(url) {
-     location.href = url;
-   }
-   GetClick() {
-     alert('hi');
+     window.open(
+       url,
+       '_blank'
+     )
    }
 }
