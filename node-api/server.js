@@ -2,6 +2,7 @@ var async = require("async");
 var request = require("request");
 var express = require('express');
 var app = express();
+var longpoll = require("express-longpoll")(app);
 var port = process.env.PORT || 8080;
 var router = express.Router();
 
@@ -19,7 +20,8 @@ var requests = [{
     //     }
     // }
 ];
-
+var id = 0;
+setInterval(function() {
 async.map(requests, function(obj, callback) {
     // iterator function
     request(obj, function(error, response, body) {
@@ -41,6 +43,7 @@ async.map(requests, function(obj, callback) {
     if (err) {
         console.log("error ", err);
     } else {
+        if (id==0){
         router.get('/', function(req, res) {
             res.json(results);	
         });
@@ -50,6 +53,8 @@ async.map(requests, function(obj, callback) {
         // for (var i = 0; i < results[0].length; i++) {
         //     // console.log(results[0].length)
         // }
+        id = 1;
+      }
     }
   });
-
+}, 2000);
