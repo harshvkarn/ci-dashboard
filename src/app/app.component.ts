@@ -8,17 +8,25 @@ import { map } from 'rxjs/operators';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent implements OnInit {
-  bitcoin: any;
+  id: any;
   title = 'CI-Dashboard';
   restItems: any;
-  restItemsUrl = 'http://localhost:8080/api';
+  restItemsUrl = 'http://worldclockapi.com/api/json/est/now';
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
-    const bitcoin$ = this.http.get('https://blockchain.info/ticker');
     this.getRestItems();
+    this.id = setInterval(() => {
+      this.getRestItems(); 
+    }, 1000);
   }
+  ngOnDestroy() {
+    if (this.id) {
+      clearInterval(this.id);
+    }
+  }
+  
 
   // Read all REST Items
    getRestItems(): void {
@@ -26,7 +34,7 @@ export class AppComponent implements OnInit {
       .subscribe(
         restItems => {
           this.restItems = restItems;
-          console.log(this.restItems);
+          // console.log(this.restItems);
         }
       )
   }
