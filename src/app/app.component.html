@@ -1,8 +1,8 @@
 <div class="container-fluid mast-head">
-    <img class="logo" src="src/assets/images/openebs-logo-mule.svg">
-    <img class="e2e" src="/src/assets/images/e2e.jpg">
+    <img class="logo" src="src/assets/images/openebs-e2e.png">
+    <!-- <img class="e2e" src="/src/assets/images/openee2e.jpg"> -->
 </div>
-  <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
+  <ul class="nav  nav-tabs nav-pills" id="myTab" role="tablist">
     <li class="nav-item">
       <a class="nav-link active" id="master-tab" data-toggle="tab" href="#master" role="tab" aria-controls="master" aria-selected="true">Master</a>
     </li>
@@ -33,17 +33,17 @@
             </td>
             <td class="danger">
               <button type="button" [ngClass]='buttonClass(post[0].build.status)' (click)="clickit(post[0].build.web_url);">
-                <i [ngClass]='iconClass(post[0].build.status)' style="font-size:14px"></i> {{post[0].build.status}}
+                <i [ngClass]='iconClass(post[0].build.status)' style="font-size:16px"></i> {{post[0].build.status.toUpperCase()}}
               </button>
             </td>
             <td>
               <button type="button" [ngClass]='buttonClass(post[1].aws.status)' (click)="clickit(post[1].aws.web_url);">
-                <i [ngClass]='iconClass(post[1].aws.status)' style="font-size:14px"></i> {{post[1].aws.status}}
+                <i [ngClass]='iconClass(post[1].aws.status)' style="font-size:16px"></i> {{post[1].aws.status.toUpperCase()}}
               </button>
             </td>
             <td>
               <button type="button" [ngClass]='buttonClass(post[2].gcp.status)' (click)="clickit(post[2].gcp.web_url);">
-                <i [ngClass]='iconClass(post[2].gcp.status)' style="font-size:14px"></i> {{post[2].gcp.status}}
+                <i [ngClass]='iconClass(post[2].gcp.status)' style="font-size:16px"></i> {{post[2].gcp.status.toUpperCase()}}
               </button>
             </td>
           </tr>

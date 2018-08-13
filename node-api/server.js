@@ -4,7 +4,9 @@ var express = require('express');
 var app = express();
 var port = process.env.PORT || 8080;
 var router = express.Router();
+var cors = require('cors');
 
+app.use(cors())
 // create request objects
 var requests = [{
         url: 'https://gitlab.com/api/v4/projects/7642571/pipelines',
@@ -42,18 +44,21 @@ async.map(requests, function(obj, callback) {
     if (err) {
         console.log("error ", err);
     } else {
-        if (id==0){
-        router.get('/', function(req, res) {
-            res.json(results);	
+        app.get('/api', function(req, res) {
+          res.json(results);
         });
-        app.use('/api', router);
-        app.listen(port);
-        console.log('server started on port ' + port);
+        app.use('/apis', router);
+        if(id != 0) {
+          server.close();
+          // console.log(server.close());
+        }
+        server = app.listen(port);
+        id = 1;
+        // console.log('server started on port ' + port);
         // for (var i = 0; i < results[0].length; i++) {
         //     // console.log(results[0].length)
         // }
-        id = 1;
-      }
+        
     }
   });
 }, 2000);

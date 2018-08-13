@@ -11,7 +11,7 @@ export class AppComponent implements OnInit {
   bitcoin: any;
   title = 'CI-Dashboard';
   restItems: any;
-  restItemsUrl = 'http://localhost:3001/rest/v1/api/v4/dashboard';
+  restItemsUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
 
@@ -43,7 +43,9 @@ export class AppComponent implements OnInit {
     if(status=="success")
            return "btn btn-round btn-success";
     else if(status=="pending")
-        return "btn btn-round btn-basic";
+        return "btn btn-round btn-warning";
+    else if(status=="canceled")
+        return "btn btn-round btn-cancel";
     else if(status=="failed")
         return "btn btn-round btn-danger";
     else if(status=="running")
@@ -54,6 +56,8 @@ export class AppComponent implements OnInit {
    iconClass(status) {
     if(status=="success")
            return "fa fa-check-circle";
+    if(status=="canceled")
+           return "fa fa-ban";
     else if(status=="pending")
         return "fa fa-clock-o";
     else if(status=="failed")

@@ -31,6 +31,15 @@
     border-radius: 30px;
     width: 120px;
     font-size: 12px;
+    font-weight: bold;
+    color: white;
+}
+.btn-round:hover {
+    background:white;
+    color: black;
+}
+.btn-cancel {
+  background: #b5b3b3;
 }
 .success-text {
   color: green;
@@ -42,7 +51,7 @@
 a {
    color: inherit; 
 }
-
+/* 
 .logo {
   width: 420px;
   left: 0px;
@@ -55,7 +64,7 @@ a {
 .mast-head {
   margin-top: -50px;
   margin-bottom: -40px;
-}
+} */
 
 .icon-aws {
   width: 20px;
