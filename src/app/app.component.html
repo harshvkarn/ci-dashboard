@@ -1,127 +1,155 @@
-<div class="container-fluid mast-head">
-    <img class="logo" src="src/assets/images/openebs-e2e.png">
-    <!-- <img class="e2e" src="/src/assets/images/openee2e.jpg"> -->
+<div class="container-fluid mast-head row">
+    <img class="logo col-sm-6" src="src/assets/images/openebs-e2e.png">
+    <div class="col-sm-4"></div>
+    <!-- <img class="e2e col-sm-2" src="/src/assets/images/mule.png"> -->
 </div>
- <div class="container-fluid ">
-  <ul class="nav  nav-tabs nav-pills" id="myTab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="master-tab" data-toggle="tab" href="#master" role="tab" aria-controls="master" aria-selected="true">Master</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="release-tab" data-toggle="tab" href="#release" role="tab" aria-controls="release" aria-selected="false">v0.6</a>
-    </li>
-  </ul>
- </div>
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active table-responsive" id="master" role="tabpanel" aria-labelledby="master-tab">
-      <table class="table table-hover header-fixed">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col"><i class="fa fa-code-fork "></i> Commits</th>
-            <th scope="col"><i class="fa fa-cog"></i> Build</th>
-            <th scope="col"><img src="src/assets/images/icon-aws.png" class="icon-aws">  AWS</th>
-            <th scope="col"><img src="src/assets/images/icon-gcp.png" class="icon-gcp">GCP</th>
-            <th>{{bitcoin }}</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="undefined !== restItems">
-            <tr *ngFor="let post of restItems[0]">
-            <td scope="row">
-              <span class="text">
-                <a href="" target="_blank">
-                  <!-- jiva/#{{post.id}} --> {{post[0].commit.substring(32,40)}}
-                </a>
-              </span>
-            </td>
-            <td class="danger">
-              <button type="button" [ngClass]='buttonClass(post[0].build.status)' (click)="clickit(post[0].build.web_url);">
-                <i [ngClass]='iconClass(post[0].build.status)' style="font-size:16px"></i> {{post[0].build.status.toUpperCase()}}
-              </button>
-            </td>
-            <td>
-              <button type="button" [ngClass]='buttonClass(post[1].aws.status)' (click)="clickit(post[1].aws.web_url);">
-                <i [ngClass]='iconClass(post[1].aws.status)' style="font-size:16px"></i> {{post[1].aws.status.toUpperCase()}}
-              </button>
-            </td>
-            <td>
-              <button type="button" [ngClass]='buttonClass(post[2].gcp.status)' (click)="clickit(post[2].gcp.web_url);">
-                <i [ngClass]='iconClass(post[2].gcp.status)' style="font-size:16px"></i> {{post[2].gcp.status.toUpperCase()}}
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<!-- ci dashboard and workloads -->
+ <div class="navp">
+  <nav class="navbar navbar-dark">
+    <ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+          <a class="nav-link active" href="#dashboard" role="tab" data-toggle="tab">CI- Dashboard</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#workloads" role="tab" data-toggle="tab">Stateful Workloads</a>
+        </li>
+    </ul>
+  </nav>
+  </div>
 
-    <div class="tab-pane fade" id="release" role="tabpanel" aria-labelledby="release-tab">
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Commits</th>
-            <th scope="col">Builds</th>
-            <th scope="col">AWS</th>
-            <th scope="col">GCP</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">jiva/#d4s3fe2</th>
-            <td>
-              <button type="button" class="btn btn-round btn-primary">
-                <i class="fa fa-circle-o-notch fa-spin" style="font-size:14px"></i> Running
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-basic">
-                <i class="fa fa-clock-o" style="font-size:14px"></i> Pending
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-basic">
-                <i class="fa fa-clock-o" style="font-size:14px"></i> Pending
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">maya/#dgd516s</th>
-            <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-danger">
-                <i class="fa fa-exclamation-triangle" style="font-size:14px"></i> Failed
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">istgt/#da1se1c</th>
-            <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-primary">
-                <i class="fa fa-circle-o-notch fa-spin" style="font-size:14px"></i> Running
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<!-- END ci dash.. -->
+
+<div class="container">
+ <div class="container-fluid row ">
+      <div class="col-md-4">
+        <ul class="nav navbar-dark bg-light nav-tabs nav-pills" id="myTab" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="master-tab" data-toggle="tab" href="#master" role="tab" aria-controls="master" aria-selected="true">Master</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="release-tab" data-toggle="tab" href="#release" role="tab" aria-controls="release" aria-selected="false">v0.7-rc1</a>
+        </ul>
+      </div>
+      <div class="col-sm-6"></div>
+      <div class="col-sm-2 stargazers">  
+          <button type="button" class="btn heart-btn btn-danger" (click)="clickit('https://github.com/openebs/openebs/stargazers');"><i class="fa fa-heart"> </i> <span class="badge badge-light"></span></button>
+      </div>
+ </div>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active table-responsive" id="master" role="tabpanel" aria-labelledby="master-tab">
+        <table class="table table-hover header-fixed">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col"><i class="fa fa-code-fork "></i> Commits</th>
+              <th scope="col"><i class="fa fa-cog"></i> Build</th>
+              <th scope="col"><img src="src/assets/images/icon-aws.png" class="icon-aws">  AWS</th>
+              <th scope="col"><img src="src/assets/images/icon-gcp.png" class="icon-gcp">GCP</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="undefined !== restItems">
+              <tr *ngFor="let post of restItems">
+              <td scope="row">
+                <span class="text">
+                  <a href="" target="_blank">
+                    <!-- jiva/#{{post.id}} --> {{post[0].commit.substring(32,40)}}
+                  </a>
+                </span>
+              </td>
+              <td class="danger">
+                <div class="dropdown">
+                  <button type="button" [ngClass]='buttonClass(post[0].build.status)' (click)="clickit(post[0].build.web_url);">
+                    <i [ngClass]='iconClass(post[0].build.status)' style="font-size:16px"></i> {{post[0].build.status.toUpperCase()}}
+                  </button>
+                  <div class="dropdown-content">
+                    <a href>Setup</a>
+                    <a href>Test</a>
+                    <a href>App-test</a>
+                    <a href>Cleanup</a>
+                  </div>
+                </div>
+              </td>
+              <td>
+                <button type="button" [ngClass]='buttonClass(post[1].aws.status)' (click)="clickit(post[1].aws.web_url);">
+                  <i [ngClass]='iconClass(post[1].aws.status)' style="font-size:16px"></i> {{post[1].aws.status.toUpperCase()}}
+                </button>
+              </td>
+              <td>
+                <button type="button" [ngClass]='buttonClass(post[2].gcp.status)' (click)="clickit(post[2].gcp.web_url);">
+                  <i [ngClass]='iconClass(post[2].gcp.status)' style="font-size:16px"></i> {{post[2].gcp.status.toUpperCase()}}
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="tab-pane fade" id="release" role="tabpanel" aria-labelledby="release-tab">
+        <table class="table">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col">Commits</th>
+              <th scope="col">Builds</th>
+              <th scope="col">AWS</th>
+              <th scope="col">GCP</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">jiva/#d4s3fe2</th>
+              <td>
+                <button type="button" class="btn btn-round btn-primary">
+                  <i class="fa fa-circle-o-notch fa-spin" style="font-size:14px"></i> Running
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-round btn-basic">
+                  <i class="fa fa-clock-o" style="font-size:14px"></i> Pending
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-round btn-basic">
+                  <i class="fa fa-clock-o" style="font-size:14px"></i> Pending
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">maya/#dgd516s</th>
+              <td>
+                <button type="button" class="btn btn-round btn-success">
+                  <i class="fa fa-check-circle" style="font-size:14px"></i> Success
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-round btn-success">
+                  <i class="fa fa-check-circle" style="font-size:14px"></i> Success
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-round btn-danger">
+                  <i class="fa fa-exclamation-triangle" style="font-size:14px"></i> Failed
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <th scope="row">istgt/#da1se1c</th>
+              <td>
+                <button type="button" class="btn btn-round btn-success">
+                  <i class="fa fa-check-circle" style="font-size:14px"></i> Success
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-round btn-primary">
+                  <i class="fa fa-circle-o-notch fa-spin" style="font-size:14px"></i> Running
+                </button>
+              </td>
+              <td>
+                <button type="button" class="btn btn-round btn-success">
+                  <i class="fa fa-check-circle" style="font-size:14px"></i> Success
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
     </div>
   </div>
-  <script>
-    
-  </script>

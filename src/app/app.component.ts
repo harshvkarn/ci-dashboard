@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
+import * as $ from 'jquery';
 
 @Component({
   selector: 'app-root',
@@ -11,15 +12,23 @@ export class AppComponent implements OnInit {
   id: any;
   title = 'CI-Dashboard';
   restItems: any;
-  restItemsUrl = 'http://worldclockapi.com/api/json/est/now';
+  restItemsUrl = 'http://localhost:8080/api';
 
   constructor(private http: HttpClient) {}
 
   ngOnInit() {
+    $(document).ready(function(){
+      $("button").click(function(){
+          var div = $("div");  
+          div.animate({left: '100px'}, "slow");
+          div.animate({fontSize: '5em'}, "slow");
+        });
+   });
+
     this.getRestItems();
     this.id = setInterval(() => {
       this.getRestItems(); 
-    }, 1000);
+    }, 6000000);
   }
   ngOnDestroy() {
     if (this.id) {
@@ -34,7 +43,7 @@ export class AppComponent implements OnInit {
       .subscribe(
         restItems => {
           this.restItems = restItems;
-          // console.log(this.restItems);
+          console.log( JSON.stringify(this.restItems));
         }
       )
   }
@@ -49,15 +58,15 @@ export class AppComponent implements OnInit {
   // Button Class Name a/c to the status
   buttonClass(status) {
     if(status=="success")
-           return "btn btn-round btn-success";
+           return "btn dropbtn btn-round btn-success";
     else if(status=="pending")
-        return "btn btn-round btn-warning";
+        return "btn dropbtn btn-round btn-warning";
     else if(status=="canceled")
-        return "btn btn-round btn-cancel";
+        return "btn dropbtn btn-round btn-cancel";
     else if(status=="failed")
-        return "btn btn-round btn-danger";
+        return "btn dropbtn btn-round btn-danger";
     else if(status=="running")
-        return "btn btn-round btn-primary";
+        return "btn dropbtn btn-round btn-primary";
    }
 
    // Fa Icon a/c to the status
