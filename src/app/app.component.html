@@ -4,22 +4,10 @@
     <!-- <img class="e2e col-sm-2" src="/src/assets/images/mule.png"> -->
 </div>
 <!-- ci dashboard and workloads -->
- <div class="navp">
-  <nav class="navbar navbar-dark">
-    <ul class="nav nav-tabs" role="tablist">
-        <li class="nav-item">
-          <a class="nav-link active" href="#dashboard" role="tab" data-toggle="tab">CI- Dashboard</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="#workloads" role="tab" data-toggle="tab">Stateful Workloads</a>
-        </li>
-    </ul>
-  </nav>
-  </div>
 
 <!-- END ci dash.. -->
 
-<div class="container">
+<div class="container-fluid">
  <div class="container-fluid row ">
       <div class="col-md-4">
         <ul class="nav navbar-dark bg-light nav-tabs nav-pills" id="myTab" role="tablist">
@@ -41,7 +29,6 @@
           <thead class="thead-dark">
             <tr>
               <th scope="col"><i class="fa fa-code-fork "></i> Commits</th>
-              <th scope="col"><i class="fa fa-cog"></i> Build</th>
               <th scope="col"><img src="src/assets/images/icon-aws.png" class="icon-aws">  AWS</th>
               <th scope="col"><img src="src/assets/images/icon-gcp.png" class="icon-gcp">GCP</th>
             </tr>
@@ -51,33 +38,65 @@
               <td scope="row">
                 <span class="text">
                   <a href="" target="_blank">
-                    <!-- jiva/#{{post.id}} --> {{post[0].commit.substring(32,40)}}
+                    <!-- jiva/#{{post.id}} --> {{post[0].commit.substring(0,8)}}
                   </a>
                 </span>
               </td>
-              <td class="danger">
-                <div class="dropdown">
-                  <button type="button" [ngClass]='buttonClass(post[0].build.status)' (click)="clickit(post[0].build.web_url);">
-                    <i [ngClass]='iconClass(post[0].build.status)' style="font-size:16px"></i> {{post[0].build.status.toUpperCase()}}
-                  </button>
-                  <div class="dropdown-content">
-                    <a href>Setup</a>
-                    <a href>Test</a>
-                    <a href>App-test</a>
-                    <a href>Cleanup</a>
-                  </div>
+              <td>
+                <div class="container row">
+                    <div class="left col-md-3">
+                      <div class="left-center">
+                        <button type="button" [ngClass]='buttonClass(post[1].aws.status)' (click)="clickit(post[1].aws.web_url);">
+                          <i [ngClass]='iconClass(post[1].aws.status)' style="font-size:14px"></i> {{post[1].aws.status.toUpperCase()}}
+                        </button>
+                      </div>
+                    </div>
+                    <div class="connector col-md-2">
+                      <img src="assets/images/pipe.svg" class="pipe">
+                    </div>
+                    <!-- Buttons Linking to Litmus -->
+                    <div class="right col-md-3">
+                      <div class="right-up">
+                          <button type="button" class="btn dropbtn btn-round btn-litmus" (click)="clickit(post[1].aws.web_url);">
+                            <i class="fa fa-thermometer-empty" style="font-size:14px"></i> GITLAB
+                          </button>
+                      </div>
+                      <div class="right-down">
+                          <button type="button" class="btn dropbtn btn-round btn-eye" (click)="clickit(post[1].aws.web_url);">
+                            <i class="fa fa-eye" style="font-size:14px"></i> LOGS
+                          </button>
+                      </div>
+                    </div>
                 </div>
               </td>
               <td>
-                <button type="button" [ngClass]='buttonClass(post[1].aws.status)' (click)="clickit(post[1].aws.web_url);">
-                  <i [ngClass]='iconClass(post[1].aws.status)' style="font-size:16px"></i> {{post[1].aws.status.toUpperCase()}}
-                </button>
-              </td>
-              <td>
-                <button type="button" [ngClass]='buttonClass(post[2].gcp.status)' (click)="clickit(post[2].gcp.web_url);">
-                  <i [ngClass]='iconClass(post[2].gcp.status)' style="font-size:16px"></i> {{post[2].gcp.status.toUpperCase()}}
-                </button>
-              </td>
+                  <div class="container row">
+                      <div class="left col-md-3">
+                        <div class="left-center">
+                          <button type="button" [ngClass]='buttonClass(post[1].aws.status)' (click)="clickit(post[1].aws.web_url);">
+                            <i [ngClass]='iconClass(post[1].aws.status)' style="font-size:14px"></i> {{post[1].aws.status.toUpperCase()}}
+                          </button>
+                        </div>
+                      </div>
+                      <div class="connector col-md-2">
+                        <img src="assets/images/pipe.svg" class="pipe">
+                      </div>
+                      <!-- Buttons Linking to Litmus -->
+                      <div class="right col-md-3">
+                        <div class="right-up">
+                            <button type="button" class="btn dropbtn btn-round btn-litmus" (click)="clickit(post[1].aws.web_url);">
+                              <i class="fa fa-thermometer-empty" style="font-size:14px"></i> GITLAB
+                            </button>
+                        </div>
+                        <div class="right-down">
+                            <button type="button" class="btn dropbtn btn-round btn-eye" (click)="clickit(post[1].aws.web_url);">
+                              <i class="fa fa-eye" style="font-size:14px"></i> LOGS
+                            </button>
+                        </div>
+                      </div>
+                  </div>
+                </td>
+              
             </tr>
           </tbody>
         </table>
