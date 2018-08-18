@@ -7,9 +7,14 @@
   "author": "chandan kumar",
   "license": "MIT",
   "dependencies": {
+    "async-to-sync": "^1.0.7",
+    "babel-polyfill": "^6.26.0",
+    "body-parser": "~1.18.2",
     "express": "~4.16.1",
-    "morgan": "~1.9.0",
+    "merge-json": "0.1.0-b.3",
     "mongoose": "~4.11.14",
-    "body-parser": "~1.18.2"
+    "morgan": "~1.9.0",
+    "socket.io": "^2.1.1",
+    "synchronize": "^2.0.0"
   }
 }
