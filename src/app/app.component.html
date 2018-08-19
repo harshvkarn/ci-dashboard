@@ -1,125 +1,203 @@
-<div class="container-fluid mast-head">
-    <img class="logo" src="src/assets/images/openebs-logo-mule.svg">
-    <img class="e2e" src="/src/assets/images/e2e.jpg">
-</div>
-  <ul class="nav nav-tabs justify-content-end" id="myTab" role="tablist">
-    <li class="nav-item">
-      <a class="nav-link active" id="master-tab" data-toggle="tab" href="#master" role="tab" aria-controls="master" aria-selected="true">Master</a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" id="release-tab" data-toggle="tab" href="#release" role="tab" aria-controls="release" aria-selected="false">v0.6</a>
-    </li>
-  </ul>
-  <div class="tab-content" id="myTabContent">
-    <div class="tab-pane fade show active table-responsive" id="master" role="tabpanel" aria-labelledby="master-tab">
-      <table class="table table-hover">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col"><i class="fa fa-code-fork "></i> Commits</th>
-            <th scope="col"><i class="fa fa-cog"></i> Build</th>
-            <th scope="col"><img src="src/assets/images/icon-aws.png" class="icon-aws">  AWS</th>
-            <th scope="col"><img src="src/assets/images/icon-gcp.png" class="icon-gcp">GCP</th>
-            <th>{{bitcoin }}</th>
-          </tr>
-        </thead>
-        <tbody *ngIf="undefined !== restItems">
-            <tr *ngFor="let post of restItems[0]">
-            <td scope="row">
-              <span class="text">
-                <a href="" target="_blank">
-                  <!-- jiva/#{{post.id}} --> {{post[0].commit.substring(32,40)}}
-                </a>
-              </span>
-            </td>
-            <td class="danger">
-              <button type="button" [ngClass]='buttonClass(post[0].build.status)' (click)="clickit(post[0].build.web_url);">
-                <i [ngClass]='iconClass(post[0].build.status)' style="font-size:14px"></i> {{post[0].build.status}}
-              </button>
-            </td>
-            <td>
-              <button type="button" [ngClass]='buttonClass(post[1].aws.status)' (click)="clickit(post[1].aws.web_url);">
-                <i [ngClass]='iconClass(post[1].aws.status)' style="font-size:14px"></i> {{post[1].aws.status}}
-              </button>
-            </td>
-            <td>
-              <button type="button" [ngClass]='buttonClass(post[2].gcp.status)' (click)="clickit(post[2].gcp.web_url);">
-                <i [ngClass]='iconClass(post[2].gcp.status)' style="font-size:14px"></i> {{post[2].gcp.status}}
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
+<nav class="navbar navbar-expand-lg bg-light sticky-top box">
+  <a href="https://openebs.io/" target="_blank" class="navbar-brand">
+    <img src="assets/images/openebs-logo-mule.svg" style="width:132px;height:32px">
+  </a>
+  <button class="navbar-toggler" data-toggle="collapse" data-target="#navbarMenu">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarMenu">
+    <ul class="navbar-nav ml-auto">
+      <li class="navbar-brand">
+        <a href="https://docs.openebs.io/" target="_blank" class="nav-link">
+          <div class="text-dark">Docs</div>
+        </a>
+      </li>
+      <li class="navbar-brand">
+        <a href="https://openebs.io/litmus" target="_blank" class="nav-link">
+          <div class="text-dark">Litmus</div>
+        </a>
+      </li>
+      <li class="navbar-brand">
+        <a href="#" class="nav-link">
+          <div class="text-dark">Test</div>
+        </a>
+      </li>
+      <li class="navbar-brand">
+        <a href="https://blog.openebs.io/" target="_blank" class="nav-link">
+          <div class="text-dark">Blog</div>
+        </a>
+      </li>
+      <li class="navbar-brand">
+        <a href="https://openebs.io/faq" target="_blank" class="nav-link">
+          <div class="text-dark">FAQ</div>
+        </a>
+      </li>
+      <li class="navbar-brand">
+          <a href="https://github.com/openebs/" target="_blank" class="nav-link">
+            <div class="text-dark"><i class="fa fa-github"></i> Github</div>
+          </a>
+      </li>
+      <li class="navbar-brand">
+        <a href="https://slack.openebs.io/" target="_blank" class="nav-link">
+          <div class="text-dark"><i class="fa fa-slack"></i> Slack</div>
+        </a>
+      <li class="navbar-brand">
+        <a href="https://twitter.com/openebs" target="_blank" class="nav-link">
+          <div class="text-dark"><i class="fa fa-twitter"></i> Twitter</div>
+        </a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- ci dashboard and workloads -->
 
-    <div class="tab-pane fade" id="release" role="tabpanel" aria-labelledby="release-tab">
-      <table class="table">
-        <thead class="thead-dark">
-          <tr>
-            <th scope="col">Commits</th>
-            <th scope="col">Builds</th>
-            <th scope="col">AWS</th>
-            <th scope="col">GCP</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">jiva/#d4s3fe2</th>
-            <td>
-              <button type="button" class="btn btn-round btn-primary">
-                <i class="fa fa-circle-o-notch fa-spin" style="font-size:14px"></i> Running
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-basic">
-                <i class="fa fa-clock-o" style="font-size:14px"></i> Pending
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-basic">
-                <i class="fa fa-clock-o" style="font-size:14px"></i> Pending
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">maya/#dgd516s</th>
-            <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-danger">
-                <i class="fa fa-exclamation-triangle" style="font-size:14px"></i> Failed
-              </button>
-            </td>
-          </tr>
-          <tr>
-            <th scope="row">istgt/#da1se1c</th>
-            <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-primary">
-                <i class="fa fa-circle-o-notch fa-spin" style="font-size:14px"></i> Running
-              </button>
-            </td>
-            <td>
-              <button type="button" class="btn btn-round btn-success">
-                <i class="fa fa-check-circle" style="font-size:14px"></i> Success
-              </button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+<!-- END ci dash.. -->
+<div class="container-fluid jumbotron">
+  <div class="container">
+   <div class="row">
+    <div class="col-md-6">
+      <button type="button" class="btn heart-btn btn-danger float-left" (click)="clickit('https://github.com/openebs/openebs.git');"><i class="fa fa-code-fork"> </i>  0.7RC1</button>
+    </div>
+    <div class="col-md-6">
+      <button type="button" class="btn heart-btn btn-danger float-right" (click)="clickit('https://github.com/openebs/openebs/stargazers');"><i class="fa fa-heart"> </i> <span class="badge badge-light"></span></button>
+    </div>
+   </div>
+<!-- <div class="container white"> -->
+<!-- </div> -->
+    <!-- <div class="tab-content" id="myTabContent"> -->
+      <!-- <div class="tab-pane fade show active table-responsive" id="master" role="tabpanel" aria-labelledby="master-tab"> -->
+      <!-- <div class="container white"> -->
+        <table class="table table-hover header-fixed white">
+          <thead class="thead-dark">
+            <tr>
+              <th scope="col" style="padding-left: 100px; width: 22%; "><i class="fa fa-code-fork "></i> Commits</th>
+              <th scope="col" style="padding-left: 120px;"><img src="src/assets/images/icon-aws.png" class="icon-aws">  AWS</th>
+              <th scope="col" style="padding-left: 100px;"><img src="src/assets/images/icon-gcp.png" class="icon-gcp">GCP</th>
+            </tr>
+          </thead>
+          <tbody *ngIf="undefined !== restItems">
+              <tr *ngFor="let post of awsItems; let post2 of gcpItems" >
+              <td scope="row" style="padding-left: 100px;">
+                <span class="text" ng-if="post.commit_url=post2.commit_url">
+                  <a href="{{goTo(post.commit_url)}}" target="_blank" >
+                    <!-- jiva/#{{post.id}}  {{post[0].commit.substring(0,8)}} --> {{post.sha.substring(0,8)}}
+                  </a>
+                </span>
+              </td>
+              <!-- AWS Buttons -->
+              <td>
+                  <div class="container row">
+                      <div class="left col-md-3">
+                        <div class="left-center">
+                          <button type="button" [ngClass]='buttonClass(post.status)'>
+                            <i [ngClass]='iconClass(post.status)' style="font-size:14px"></i> {{post.status.toUpperCase()}}
+                          </button>
+                        </div>
+                      </div>
+                      <div class="connector col-md-2">
+                        <img src="assets/images/pipe.svg" class="pipe">
+                      </div>
+                      <!-- Buttons Linking to Litmus -->
+                      <div class="right col-md-3">
+                        <div class="right-up">
+                            <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.web_url);">
+                              <i class="fa fa-thermometer-empty" style="font-size:14px"></i> GITLAB
+                            </button>
+                        </div>
+                        <div class="right-down">
+                            <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.log_link);">
+                              <i class="fa fa-eye" style="font-size:14px"></i> LOGS
+                            </button>
+                        </div>
+                      </div>
+                  </div>
+                </td>
+                
+                <!-- GCP Buttons -->
+                <td>
+                    <div class="container row">
+                        <div class="left col-md-3">
+                          <div class="left-center">
+                            <button type="button" [ngClass]='buttonClass(post2.status)'> <!--gcpItems[post.length].status-->
+                              <i [ngClass]='iconClass(post2.status)' style="font-size:14px"></i> {{post2.status.toUpperCase()}}
+                            </button>
+                          </div>
+                        </div>
+                        <div class="connector col-md-2">
+                            <img src="assets/images/pipe.svg" class="pipe">
+                          </div>
+                          <!-- Buttons Linking to Litmus -->
+                          <div class="right col-md-3">
+                            <div class="right-up">
+                                <button type="button" [ngClass]='buttonClass(post2.status)' (click)="clickit(post2.web_url);">
+                                  <i class="fa fa-thermometer-empty" style="font-size:14px"></i> GITLAB
+                                </button>
+                            </div>
+                            <div class="right-down">
+                                <button type="button" [ngClass]='buttonClass(post2.status)' (click)="clickit(post2.log_link);">
+                                  <i class="fa fa-eye" style="font-size:14px"></i> LOGS
+                                </button>
+                            </div>
+                          </div>                        
+                    </div>
+                  </td>
+                
+            </tr>
+          </tbody>
+        </table>
+       </div>
+      <!-- </div> -->
+    <!-- </div> -->
+  <!-- </div> -->
+</div>
+
+
+<div class="container-fluid" style="background-color: rgb(34, 34, 43)">
+    <div class="jumbotron-fluid">
+      <div class="row content">
+        <div class="col-sm-2 my-5"></div>
+
+        <div class="col-sm-7 my-5">
+          <table class="table borderless">
+            <tbody class="textcolor">
+              <tr>
+                <td><a href="https://openebs.io/events" class="text-white" target="_blank">Events</a></td>
+                <td><a href="https://openebs.io/careers" class="text-white" target="_blank">Careers</a></td>
+                <td><a href="https://github.com/openebs/" class="text-white" target="_blank"><i class="fa fa-github"></i> Github</a></td>
+              </tr>
+              <tr>
+                <td><a href="https://openebs.io/hackfests" class="text-white" target="_blank">Hackfests</a></td>
+                <td><a href="https://openebs.io/faq" class="text-white" target="_blank">FAQ</a></td>
+                <td><a href="https://slack.openebs.io/" class="text-white" target="_blank"><i class="fa fa-slack"></i> Slack</a></td>
+              </tr>
+              <tr>
+                <td><a href="https://openebs.io/hangout" class="text-white" target="_blank">Hangouts</a></td>
+                <td><a href="https://openebs.io/newsletter/" class="text-white" target="_blank">Newsletters</a></td>
+                <td><a href="https://blog.openebs.io/" class="text-white" target="_blank"><i class="fa fa-newspaper-o"></i> Blogs</a></td>
+              </tr>
+              <tr>
+                <td><a href="https://openebs.io/meetups" class="text-white" target="_blank">Meetup</a></td>
+                <td><a href="https://www.youtube.com/channel/UC3ywadaAUQ1FI4YsHZ8wa0g" class="text-white" target="_blank">Videos</a></td>
+                <td><a href="https://twitter.com/openebs" class="text-white" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></td>
+              </tr>
+              <tr>
+                <td><a href="https://openebs.io/cafe" class="text-white" target="_blank">Cafe</a></td>
+                <td><a href="https://docs.openebs.io/" class="text-white" target="_blank">Docs</a></td>
+                <td><a href="https://openebs.io/litmus" class="text-white" target="_blank"><i class="fa fa-thermometer-empty"></i> Litmus</a></td>
+              </tr>
+              <tr>
+                <td><a href="https://www.katacoda.com/openebs/scenarios/openebs-intro" class="text-white" target="_blank">Training</a></td>
+                <td><a href="https://docs.openebs.io/docs/releasenotes.html" class="text-white" target="_blank">Releases</a></td>
+                <td><a href="https://www.mayadata.io/aboutus" class="text-white" target="_blank"><i class="fa fa-info"></i> About Us</a></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <div class="col-sm-1 my-5">
+        <img src="assets/images/openebs-logo.svg" class="mt-4" style="width:122px;height:40px">
+        <img src="assets/images/mayaonline-beta.svg" class="mt-4" style="width:142px;height:43px">
+        <img src="assets/images/mayadata-logo.svg" class="mt-4" style="width:118px;height:35px">
+        </div>
+      </div>
     </div>
   </div>
-  <script>
-    
-  </script>

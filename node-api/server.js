@@ -7,6 +7,11 @@ var dashboard = [];
 var pipelines = [];
 // var p_id_store = [];
 
+var cors = require('cors');
+
+app.use(cors());
+
+
 setInterval(function() {
     var p1_data;
     var aws = {  
