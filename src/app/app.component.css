@@ -27,6 +27,14 @@
   background-color: #428bca;
   padding : 5px 15px;
 }
+
+.bg {
+  background-color:#e6e6e6
+}
+.white {
+  background-color: white; 
+  /* margin-right: 50px;  */
+}
 .btn-round {
     border-radius: 30px;
     width: 100px;
@@ -38,6 +46,7 @@
     background:white;
     color: black;
 }
+
 .btn-cancel {
   background: #b5b3b3;
 }
@@ -95,10 +104,14 @@ a {
 }
 .heart-btn {
   /* color: white; */
+  align-self: right;
 }
 .heart-btn:hover {
   background: white;
   color: red;
+}
+.heart-right {
+  align-content: flex-end;
 }
 
 /* Hover Button dropdown */
@@ -159,19 +172,19 @@ a {
 .left {
   /* top: 15px; */
   align-self: center;
+  left: 20px;
 }
 .right {
-  right:40px;
-  bottom: 5px;
+  left:20px;
 }
 .connector {
-  right: 70px;
+  left: 25px;
   /* top: 10px; */
   align-self: center;
-  z-index: -1;
+  z-index: 0;
 }
 .right-up {
-  padding-bottom: 10px; 
+  padding-bottom: 2px; 
 
 }
 .right-down {
@@ -179,7 +192,7 @@ a {
 }
 .pipe {
   height: 60px;
-  width: 200px;
+  width: 60px;
 
 }
 /* 
@@ -222,4 +235,13 @@ a {
 
 .btn-eye {
   background: #ff4500
+}
+
+.box {
+  -webkit-box-shadow: 3px 3px 37px 2px rgba(0,0,0,0.5);
+  -moz-box-shadow: 3px 3px 37px 2px rgba(0,0,0,0.5);
+  box-shadow: 3px 3px 37px 2px rgba(0,0,0,0.5);
+}
+.borderless td, .borderless th {
+  border: none;
 }
