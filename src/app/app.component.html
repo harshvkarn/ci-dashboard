@@ -23,11 +23,6 @@
         </a>
       </li>
       <li class="navbar-brand">
-        <a href="https://github.com/openebs/" target="_blank" class="nav-link">
-          <div class="text-dark">Github</div>
-        </a>
-      </li>
-      <li class="navbar-brand">
         <a href="https://blog.openebs.io/" target="_blank" class="nav-link">
           <div class="text-dark">Blog</div>
         </a>
@@ -38,12 +33,17 @@
         </a>
       </li>
       <li class="navbar-brand">
+          <a href="https://github.com/openebs/" target="_blank" class="nav-link">
+            <div class="text-dark"><i class="fa fa-github"></i> Github</div>
+          </a>
+      </li>
+      <li class="navbar-brand">
         <a href="https://slack.openebs.io/" target="_blank" class="nav-link">
-          <div class="text-dark">Slack</div>
+          <div class="text-dark"><i class="fa fa-slack"></i> Slack</div>
         </a>
       <li class="navbar-brand">
         <a href="https://twitter.com/openebs" target="_blank" class="nav-link">
-          <div class="text-dark">Twitter</div>
+          <div class="text-dark"><i class="fa fa-twitter"></i> Twitter</div>
         </a>
       </li>
     </ul>
@@ -76,49 +76,21 @@
             </tr>
           </thead>
           <tbody *ngIf="undefined !== restItems">
-              <tr *ngFor="let post of restItems">
+              <tr *ngFor="let post of awsItems; let post2 of gcpItems" >
               <td scope="row" style="padding-left: 100px;">
-                <span class="text">
-                  <a href="" target="_blank">
-                    <!-- jiva/#{{post.id}} --> {{post[0].commit.substring(0,8)}}
+                <span class="text" ng-if="post.commit_url=post2.commit_url">
+                  <a href="{{goTo(post.commit_url)}}" target="_blank" >
+                    <!-- jiva/#{{post.id}}  {{post[0].commit.substring(0,8)}} --> {{post.sha.substring(0,8)}}
                   </a>
                 </span>
               </td>
               <!-- AWS Buttons -->
               <td>
-                <div class="container row">
-                    <div class="left col-md-3">
-                      <div class="left-center">
-                        <button type="button" [ngClass]='buttonClass(post[1].aws.status)'>
-                          <i [ngClass]='iconClass(post[1].aws.status)' style="font-size:14px"></i> {{post[1].aws.status.toUpperCase()}}
-                        </button>
-                      </div>
-                    </div>
-                    <div class="connector col-md-2">
-                      <img src="assets/images/pipe.svg" class="pipe">
-                    </div>
-                    <!-- Buttons Linking to Litmus -->
-                    <div class="right col-md-3">
-                      <div class="right-up">
-                          <button type="button" [ngClass]='buttonClass(post[1].aws.status)' (click)="clickit(post[1].aws.web_url);">
-                            <i class="fa fa-thermometer-empty" style="font-size:14px"></i> GITLAB
-                          </button>
-                      </div>
-                      <div class="right-down">
-                          <button type="button" [ngClass]='buttonClass(post[1].aws.status)' (click)="clickit('test');">
-                            <i class="fa fa-eye" style="font-size:14px"></i> LOGS
-                          </button>
-                      </div>
-                    </div>
-                </div>
-              </td>
-              <!-- GCP Buttons -->
-              <td>
                   <div class="container row">
                       <div class="left col-md-3">
                         <div class="left-center">
-                          <button type="button" [ngClass]='buttonClass(post[2].gcp.status)'>
-                            <i [ngClass]='iconClass(post[2].gcp.status)' style="font-size:14px"></i> {{post[2].gcp.status.toUpperCase()}}
+                          <button type="button" [ngClass]='buttonClass(post.status)'>
+                            <i [ngClass]='iconClass(post.status)' style="font-size:14px"></i> {{post.status.toUpperCase()}}
                           </button>
                         </div>
                       </div>
@@ -128,19 +100,48 @@
                       <!-- Buttons Linking to Litmus -->
                       <div class="right col-md-3">
                         <div class="right-up">
-                            <button type="button" [ngClass]='buttonClass(post[2].gcp.status)' (click)="clickit(post[2].gcp.web_url);">
+                            <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.web_url);">
                               <i class="fa fa-thermometer-empty" style="font-size:14px"></i> GITLAB
                             </button>
                         </div>
                         <div class="right-down">
-                            <button type="button" [ngClass]='buttonClass(post[2].gcp.status)' (click)="clickit('test');">
+                            <button type="button" [ngClass]='buttonClass(post.status)' (click)="clickit(post.log_link);">
                               <i class="fa fa-eye" style="font-size:14px"></i> LOGS
                             </button>
                         </div>
                       </div>
                   </div>
                 </td>
-              
+                
+                <!-- GCP Buttons -->
+                <td>
+                    <div class="container row">
+                        <div class="left col-md-3">
+                          <div class="left-center">
+                            <button type="button" [ngClass]='buttonClass(post2.status)'> <!--gcpItems[post.length].status-->
+                              <i [ngClass]='iconClass(post2.status)' style="font-size:14px"></i> {{post2.status.toUpperCase()}}
+                            </button>
+                          </div>
+                        </div>
+                        <div class="connector col-md-2">
+                            <img src="assets/images/pipe.svg" class="pipe">
+                          </div>
+                          <!-- Buttons Linking to Litmus -->
+                          <div class="right col-md-3">
+                            <div class="right-up">
+                                <button type="button" [ngClass]='buttonClass(post2.status)' (click)="clickit(post2.web_url);">
+                                  <i class="fa fa-thermometer-empty" style="font-size:14px"></i> GITLAB
+                                </button>
+                            </div>
+                            <div class="right-down">
+                                <button type="button" [ngClass]='buttonClass(post2.status)' (click)="clickit(post2.log_link);">
+                                  <i class="fa fa-eye" style="font-size:14px"></i> LOGS
+                                </button>
+                            </div>
+                          </div>                        
+                    </div>
+                  </td>
+                
             </tr>
           </tbody>
         </table>
@@ -162,32 +163,32 @@
               <tr>
                 <td><a href="https://openebs.io/events" class="text-white" target="_blank">Events</a></td>
                 <td><a href="https://openebs.io/careers" class="text-white" target="_blank">Careers</a></td>
-                <td><a href="https://github.com/openebs/" class="text-white" target="_blank">Github</a></td>
+                <td><a href="https://github.com/openebs/" class="text-white" target="_blank"><i class="fa fa-github"></i> Github</a></td>
               </tr>
               <tr>
                 <td><a href="https://openebs.io/hackfests" class="text-white" target="_blank">Hackfests</a></td>
                 <td><a href="https://openebs.io/faq" class="text-white" target="_blank">FAQ</a></td>
-                <td><a href="https://slack.openebs.io/" class="text-white" target="_blank">Slack</a></td>
+                <td><a href="https://slack.openebs.io/" class="text-white" target="_blank"><i class="fa fa-slack"></i> Slack</a></td>
               </tr>
               <tr>
                 <td><a href="https://openebs.io/hangout" class="text-white" target="_blank">Hangouts</a></td>
                 <td><a href="https://openebs.io/newsletter/" class="text-white" target="_blank">Newsletters</a></td>
-                <td><a href="https://blog.openebs.io/" class="text-white" target="_blank">Blogs</a></td>
+                <td><a href="https://blog.openebs.io/" class="text-white" target="_blank"><i class="fa fa-newspaper-o"></i> Blogs</a></td>
               </tr>
               <tr>
                 <td><a href="https://openebs.io/meetups" class="text-white" target="_blank">Meetup</a></td>
                 <td><a href="https://www.youtube.com/channel/UC3ywadaAUQ1FI4YsHZ8wa0g" class="text-white" target="_blank">Videos</a></td>
-                <td><a href="https://twitter.com/openebs" class="text-white" target="_blank">Twitter</a></td>
+                <td><a href="https://twitter.com/openebs" class="text-white" target="_blank"><i class="fa fa-twitter"></i> Twitter</a></td>
               </tr>
               <tr>
                 <td><a href="https://openebs.io/cafe" class="text-white" target="_blank">Cafe</a></td>
                 <td><a href="https://docs.openebs.io/" class="text-white" target="_blank">Docs</a></td>
-                <td><a href="https://openebs.io/litmus" class="text-white" target="_blank">Litmus</a></td>
+                <td><a href="https://openebs.io/litmus" class="text-white" target="_blank"><i class="fa fa-thermometer-empty"></i> Litmus</a></td>
               </tr>
               <tr>
                 <td><a href="https://www.katacoda.com/openebs/scenarios/openebs-intro" class="text-white" target="_blank">Training</a></td>
                 <td><a href="https://docs.openebs.io/docs/releasenotes.html" class="text-white" target="_blank">Releases</a></td>
-                <td><a href="https://www.mayadata.io/aboutus" class="text-white" target="_blank">About Us</a></td>
+                <td><a href="https://www.mayadata.io/aboutus" class="text-white" target="_blank"><i class="fa fa-info"></i> About Us</a></td>
               </tr>
             </tbody>
           </table>

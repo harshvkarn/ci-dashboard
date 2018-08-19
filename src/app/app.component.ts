@@ -12,7 +12,9 @@ export class AppComponent implements OnInit {
   id: any;
   title = 'CI-Dashboard';
   restItems: any;
-  restItemsUrl = 'http://localhost:8080/api';
+  awsItems: any;
+  gcpItems: any;
+  restItemsUrl = 'https://api.myjson.com/bins/u5l4c';
 
   constructor(private http: HttpClient) {}
 
@@ -43,7 +45,10 @@ export class AppComponent implements OnInit {
       .subscribe(
         restItems => {
           this.restItems = restItems;
-          console.log( JSON.stringify(this.restItems));
+          this.awsItems = restItems.dashboard['pipelines'][0];
+          this.gcpItems = restItems.dashboard['pipelines'][1];
+          // console.log( JSON.stringify(this.restItems.dashboard['pipelines'][0][0].sha));
+          console.log( JSON.stringify(this.awsItems));
         }
       )
   }
@@ -91,4 +96,9 @@ export class AppComponent implements OnInit {
        '_blank'
      )
    }
+
+   goTo(url) {
+    return url;
+    )
+  }
 }
